@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crypto Sentiment Trading Bot</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
+        h1, h2 { color: #333; }
+    </style>
+</head>
+<body>
+    <h1>Crypto Sentiment Trading Bot</h1>
+
+    <h2>Tokens</h2>
+    <table>
+        <tr>
+            <th>Token</th>
+            <th>Buy Trigger (%)</th>
+            <th>Sell Trigger (%)</th>
+            <th>Enabled</th>
+            <th>Manual</th>
+        </tr>
+        {% for token, data in config.tokens.items() %}
+        <tr>
+            <td>{{ token }}</td>
+            <td>{{ data.buy_threshold }}</td>
+            <td>{{ data.sell_threshold }}</td>
+            <td>{{ "✅" if data.enabled else "❌" }}</td>
+            <td>
+                <a href="/trade/{{ token }}/buy">Buy</a> | 
+                <a href="/trade/{{ token }}/sell">Sell</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Settings</h2>
+    <form action="/update" method="post">
+        Monitor Interval (minutes):
+        <input type="number" name="interval" value="{{ config.interval }}">
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
