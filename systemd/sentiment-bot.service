@@ -1,0 +1,14 @@
+[Unit]
+Description=Crypto Sentiment Trading Bot
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/sentiment-dashboard/app.py
+WorkingDirectory=/home/pi/sentiment-dashboard
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
